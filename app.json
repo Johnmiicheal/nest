@@ -27,6 +27,18 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
+    "expo": {
+      "plugins": [
+        [
+          "expo-font",
+          {
+            "fonts": [
+              "./node_modules/@react-native-vector-icons/ionicons/fonts/Ionicons.ttf"
+            ]
+          }
+        ]
+      ]
+    },
     "plugins": [
       "expo-router"
     ],
