@@ -1,5 +1,4 @@
 import React from 'react';
-import Icon from "@react-native-vector-icons/ionicons"
 import { Link, Tabs } from 'expo-router';
 import { Pressable } from 'react-native';
 
@@ -7,19 +6,31 @@ import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 
+import { Smile, Heart, Compass, MessageCircleMore, AlignRight, CircleEllipsis, Badge } from 'lucide-react-native';
+
+
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+
+  const iconStyle = {
+    strokeWidth: 1.5,
+    size: 28,
+  }
 
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
         tabBarStyle: {
-          'borderTopWidth': 0
+          'borderTopWidth': 0,
+          'paddingTop': 1,
+          'borderRadius': 30,
+          'width': '80%',
+          'height': 60,
+          'margin': 'auto',  
+          'marginBottom': 20,     
         }
       }}>
       <Tabs.Screen
@@ -27,13 +38,12 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           headerShown: false,
-          tabBarIcon: ({ color }) => <Icon name="copy-outline" color={color} size={28}/>,
+          tabBarIcon: ({ color }) => <Badge color={color} {...iconStyle}/>,
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
                 {({ pressed }) => (
-                  <Icon
-                    name="menu"
+                  <CircleEllipsis
                     size={25}
                     color={Colors[colorScheme ?? 'light'].text}
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
@@ -49,21 +59,21 @@ export default function TabLayout() {
         name="shortlist"
         options={{
           title: 'Shortlist',
-          tabBarIcon: ({ color }) => <Icon name="heart-outline" color={color} size={28} />,
+          tabBarIcon: ({ color }) => <Heart color={color} {...iconStyle}  />,
         }}
       />
        <Tabs.Screen
         name="chat"
         options={{
           title: 'Chat',
-          tabBarIcon: ({ color }) => <Icon name="chatbubble-ellipses-outline" color={color} size={28} />,
+          tabBarIcon: ({ color }) => <MessageCircleMore color={color} {...iconStyle} />,
         }}
       />
        <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color }) => <Icon name="person-circle-outline" color={color} size={28} />,
+          tabBarIcon: ({ color }) => <AlignRight color={color} {...iconStyle} />,
         }}
       />
     </Tabs>

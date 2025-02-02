@@ -1,19 +1,10 @@
-import React from "react";
+import type React from "react";
 import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { ApartmentScreen } from "./Apartment";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { BlurView } from "@react-native-community/blur";
+import RoommatesScreen from "./Roommates";
 
 const Tab = createMaterialTopTabNavigator();
-
-function RoommatesScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Roommates Screen</Text>
-    </View>
-  );
-}
 
 function CustomTabBar({
   state,
@@ -30,58 +21,59 @@ function CustomTabBar({
     <View
       style={{
         flexDirection: "row",
-        marginHorizontal: 20,
-        marginTop: 10,
-        backgroundColor: "#c2c2c250",
-        borderRadius: 10,
-        padding: 4,
-        overflow: "hidden",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: 10,
+        backgroundColor: 'transparent'
       }}
     >
-      <BlurView
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-        }}
-        blurType="light"
-        blurAmount={5}
-        reducedTransparencyFallbackColor="white"
+      <Image
+        source={require("../../assets/icons/nest-logo.png")}
+        style={{ width: 100, height: 30 }}
       />
-      {state.routes.map((route: any, index: number) => {
-        const { options } = descriptors[route.key];
-        const label = options.tabBarLabel ?? options.title ?? route.name;
 
-        const isFocused = state.index === index;
+      <View
+        style={{
+          flexDirection: "row",
+          backgroundColor: "#FFF",
+          borderRadius: 30,
+          padding: 4,
+          overflow: "hidden",
+        }}
+      >
+        {state.routes.map((route: any, index: number) => {
+          const { options } = descriptors[route.key];
+          const label = options.tabBarLabel ?? options.title ?? route.name;
 
-        const onPress = () => {
-          const event = navigation.emit({
-            type: "tabPress",
-            target: route.key,
-            canPreventDefault: true,
-          });
+          const isFocused = state.index === index;
 
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name);
-          }
-        };
+          const onPress = () => {
+            const event = navigation.emit({
+              type: "tabPress",
+              target: route.key,
+              canPreventDefault: true,
+            });
 
-        return (
-          <View
-            key={index}
-            style={[styles.tabItem, isFocused && styles.activeTabItem]}
-          >
-            <Text
-              style={[styles.tabText, isFocused && styles.activeTabText]}
-              onPress={onPress}
+            if (!isFocused && !event.defaultPrevented) {
+              navigation.navigate(route.name);
+            }
+          };
+
+          return (
+            <View
+              key={index}
+              style={[styles.tabItem, isFocused && styles.activeTabItem]}
             >
-              {label}
-            </Text>
-          </View>
-        );
-      })}
+              <Text
+                style={[styles.tabText, isFocused && styles.activeTabText]}
+                onPress={onPress}
+              >
+                {label}
+              </Text>
+            </View>
+          );
+        })}
+      </View>
     </View>
   );
 }
@@ -89,8 +81,8 @@ function CustomTabBar({
 export default function HomeScreen() {
   return (
     <Tab.Navigator tabBar={(props) => <CustomTabBar {...props} />}>
-      <Tab.Screen name="Apartment" component={ApartmentScreen} />
       <Tab.Screen name="Roommates" component={RoommatesScreen} />
+      <Tab.Screen name="Apartment" component={ApartmentScreen} />
     </Tab.Navigator>
   );
 }
@@ -104,21 +96,21 @@ const styles = StyleSheet.create({
   },
 
   tabItem: {
-    flex: 1,
     paddingVertical: 10,
+    paddingHorizontal: 15,
     alignItems: "center",
-    borderRadius: 10,
+    borderRadius: 30,
   },
   activeTabItem: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FFC941",
   },
   tabText: {
     fontSize: 16,
     fontWeight: "500",
-    color: "#747474",
+    color: "#A2A2A2",
   },
   activeTabText: {
-    color: "#000",
+    color: "#FFF",
   },
   swipeContainer: {
     ...StyleSheet.absoluteFillObject,

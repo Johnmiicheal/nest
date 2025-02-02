@@ -4,7 +4,7 @@ import { Platform, KeyboardAvoidingView } from "react-native";
 
 const CustomSafeAreaView = ({ children, ...rest }: PropsWithChildren) => {
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "white" }} {...rest}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#FFF4D7" }} {...rest}>
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
                 contentContainerStyle={{ flexGrow: 1 }}

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "hectre",
-    "slug": "hectre",
+    "name": "nest",
+    "slug": "nest",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,14 +15,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.hectre"
+      "bundleIdentifier": "com.anonymous.nest"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.hectre"
+      "package": "com.anonymous.nest"
     },
     "web": {
       "bundler": "metro",
