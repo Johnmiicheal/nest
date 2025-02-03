@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
@@ -19,63 +19,67 @@ export default function TabLayout() {
   }
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: useClientOnlyValue(false, true),
-        tabBarStyle: {
-          'borderTopWidth': 0,
-          'paddingTop': 1,
-          'borderRadius': 30,
-          'width': '80%',
-          'height': 60,
-          'margin': 'auto',  
-          'marginBottom': 20,     
-        }
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          headerShown: false,
-          tabBarIcon: ({ color }) => <Badge color={color} {...iconStyle}/>,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <CircleEllipsis
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-        }}
-      />
+    <View style={{ flex: 1, backgroundColor: '#FFF4D7', shadowColor: '#000', shadowOffset: { width: 0, height: -2 }, shadowOpacity: 0.8, shadowRadius: 3 }}>
+      <Tabs
+        screenOptions={{
+          tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+          headerShown: useClientOnlyValue(false, true),
+          tabBarStyle: {
+            'borderTopWidth': 0,
+            'paddingTop': 1,
+            'borderRadius': 30,
+            'width': '80%',
+            'height': 60,
+            'margin': 'auto',  
+            'marginBottom': 20,     
+          }
+        }}>
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: 'Home',
+            headerShown: false,
+            tabBarIcon: ({ color }) => <Badge color={color} {...iconStyle}/>,
+            headerRight: () => (
+              <Link href="/modal" asChild>
+                <Pressable>
+                  {({ pressed }) => (
+                    <CircleEllipsis
+                      size={25}
+                      color={Colors[colorScheme ?? 'light'].text}
+                      style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                    />
+                  )}
+                </Pressable>
+              </Link>
+            ),
+          }}
+        />
 
-       <Tabs.Screen
-        name="shortlist"
-        options={{
-          title: 'Shortlist',
-          tabBarIcon: ({ color }) => <Heart color={color} {...iconStyle}  />,
-        }}
-      />
-       <Tabs.Screen
-        name="chat"
-        options={{
-          title: 'Chat',
-          tabBarIcon: ({ color }) => <MessageCircleMore color={color} {...iconStyle} />,
-        }}
-      />
-       <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Profile',
-          tabBarIcon: ({ color }) => <AlignRight color={color} {...iconStyle} />,
-        }}
-      />
-    </Tabs>
+        <Tabs.Screen
+          name="shortlist"
+          options={{
+            title: 'Shortlist',
+            tabBarIcon: ({ color }) => <Heart color={color} {...iconStyle}  />,
+          }}
+        />
+        <Tabs.Screen
+          name="chat"
+          options={{
+            title: 'Chat',
+            tabBarIcon: ({ color }) => <MessageCircleMore color={color} {...iconStyle} />,
+          }}
+        />
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: 'Profile',
+            tabBarIcon: ({ color }) => <AlignRight color={color} {...iconStyle} />,
+          }}
+        />
+      </Tabs>
+
+    </View>
+
   );
 }
